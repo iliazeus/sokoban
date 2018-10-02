@@ -51,6 +51,58 @@ namespace Sokoban
 			return true;
 		}
 		
+		public bool ValidateMove(Move move)
+		{
+			var newPlayerCoords = new Coords(PlayerCoords, move);
+			if (! Field.IsInBounds(newPlayerCoords)) return false;
+			if (Field.GetCellAt(newPlayerCoords) == Field.Cell.Wall) {
+				return false;
+			}
+			
+			foreach (var boxCoords in BoxesCoords) {
+				if (boxCoords != newPlayerCoords) continue;
+				var newBoxCoords = new Coords(boxCoords, move);
+				if (! Field.IsInBounds(newBoxCoords)) return false;
+				if (Field.GetCellAt(newBoxCoords) == Field.Cell.Wall) {
+					return false;
+				}
+				foreach (var otherBoxCoords in BoxesCoords) {
+					if (newBoxCoords == otherBoxCoords) return false;
+				}
+			}
+			
+			return true;
+		}
+		
+		public bool ValidateMoveSequence(IEnumerable<Move> sequence)
+		{
+			var state = (State) Clone();
+			foreach (var move in sequence) {
+				if (! state.ValidateMove(move)) return false;
+				state.ApplyMove(move);
+			}
+			return true;
+		}
+		
+		public void ApplyMove(Move move)
+		{
+			if (! ValidateMove(move)) {
+				throw new InvalidOperationException("invalid move");
+			}
+			PlayerCoords = new Coords(PlayerCoords, move);
+			for (int i = 0; i < BoxesCoords.Length; i++) {
+				if (BoxesCoords[i] != PlayerCoords) continue;
+				BoxesCoords[i] = new Coords(BoxesCoords[i], move);
+			}
+		}
+		
+		public void ApplyMoveSequence(IEnumerable<Move> sequence)
+		{
+			foreach (var move in sequence) {
+				ApplyMove(move);
+			}
+		}
+		
 		public object Clone()
 		{
 			return new State(Field,

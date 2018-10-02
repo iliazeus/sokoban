@@ -9,6 +9,17 @@
 			Row = row; Col = col;
 		}
 		
+		public Coords(Coords initial, Move move)
+		{
+			this = initial;
+			switch (move) {
+				case Move.Up: this.Row -= 1; break;
+				case Move.Down: this.Row += 1; break;
+				case Move.Left: this.Col -= 1; break;
+				case Move.Right: this.Col += 1; break;
+			}
+		}
+		
 		public override bool Equals(object obj)
 		{
 			return (obj is Coords) && Equals((Coords)obj);

@@ -67,6 +67,41 @@ namespace Sokoban.Tests
 		}
 		
 		[Test]
+		public void TestMoves()
+		{
+			var state = State.ParseFrom(new StringReader(".@B.\n####"));
+			
+			Assert.That(state.ValidateMove(Move.Left));
+			Assert.That(state.ValidateMove(Move.Right));
+			Assert.That(! state.ValidateMove(Move.Up));
+			Assert.That(! state.ValidateMove(Move.Down));
+			
+			Assert.That(state.ValidateMoveSequence(
+				new Move[] { Move.Left, Move.Right }));
+			Assert.That(! state.ValidateMoveSequence(
+				new Move[] { Move.Left, Move.Down }));
+			
+			var expectedLeftState = new State(state.Field,
+			                          new Coords(0, 0),
+			                          new Coords[] { new Coords(0, 2) });
+			var expectedRightState = new State(state.Field,
+			                           new Coords(0, 0),
+			                           new Coords[] { new Coords(0, 2) });
+			
+			var leftState = (State) state.Clone();
+			leftState.ApplyMove(Move.Left);
+			Assert.That(leftState, Is.EqualTo(expectedLeftState));
+			
+			var rightState = (State) state.Clone();
+			rightState.ApplyMove(Move.Right);
+			Assert.That(leftState, Is.EqualTo(expectedRightState));
+			
+			var sameState = (State) state.Clone();
+			sameState.ApplyMoveSequence(new Move[] { Move.Left, Move.Right });
+			Assert.That(sameState, Is.EqualTo(state));
+		}
+		
+		[Test]
 		public void TestWinCondition()
 		{
 			var targetCoords = new Coords[] {
