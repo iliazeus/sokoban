@@ -8,10 +8,10 @@ namespace Sokoban
 {
 	public class PuzzleMetadata
 	{
-		public string Name { get; set; }
-		public string AuthorName { get; set; }
-		public string AuthorEmail { get; set; }
-		public DateTimeOffset? CreationDate { get; set; }
+		public string Name { get; private set; }
+		public string AuthorName { get; private set; }
+		public string AuthorEmail { get; private set; }
+		public DateTimeOffset? CreationDate { get; private set; }
 		
 		public PuzzleMetadata(string name = null,
 		                      string authorName = null,
@@ -22,6 +22,14 @@ namespace Sokoban
 			AuthorName = authorName;
 			AuthorEmail = authorEmail;
 			CreationDate = creationDate;
+		}
+		
+		public PuzzleMetadata Clone()
+		{
+			return new PuzzleMetadata(Name,
+			                          AuthorName,
+			                          AuthorEmail,
+			                          CreationDate);
 		}
 		
 		private PuzzleMetadata() {}
