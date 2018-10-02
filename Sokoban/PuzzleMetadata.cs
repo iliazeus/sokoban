@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 
+using Sokoban.Extensions;
+
 namespace Sokoban
 {
 	public class PuzzleMetadata
@@ -48,24 +50,7 @@ namespace Sokoban
 		
 		public static PuzzleMetadata ParseFrom(TextReader reader)
 		{
-			var metadata = new Dictionary<string, string>();
-			string line;
-			while (! string.IsNullOrEmpty(line = reader.ReadLine())) {
-				int colonIndex = line.IndexOf(':');
-				if (colonIndex < 0) {
-					throw new FormatException("invalid metadata format");
-				}
-				var key = line.Substring(0, colonIndex).Trim();
-				var value = line.Substring(colonIndex + 1).Trim();
-				if (key.Length == 0 || value.Length == 0) {
-					throw new FormatException("invalid metadata format");
-				}
-				if (metadata.ContainsKey(key)) {
-					throw new FormatException("invalid metadata format");
-				}
-				metadata.Add(key, value);
-			}
-			return FromDictionary(metadata);
+			return FromDictionary(DictionaryExtensions.ParseFrom(reader));
 		}
 	}
 }

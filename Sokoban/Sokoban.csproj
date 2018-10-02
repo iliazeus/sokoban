@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Move.cs" />
     <Compile Include="Coords.cs" />
     <Compile Include="Field.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Tests\StateTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Extensions" />
     <Folder Include="Tests" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
