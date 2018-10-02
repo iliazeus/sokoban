@@ -58,6 +58,7 @@
     <Compile Include="Tests\CoordsTest.cs" />
     <Compile Include="Tests\FieldTest.cs" />
     <Compile Include="Tests\PuzzleMetadataTest.cs" />
+    <Compile Include="Tests\PuzzleTest.cs" />
     <Compile Include="Tests\StateTest.cs" />
   </ItemGroup>
   <ItemGroup>
