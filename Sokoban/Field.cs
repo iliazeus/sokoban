@@ -13,9 +13,21 @@ namespace Sokoban
 			this.cells = (Cell[,]) cells.Clone();
 		}
 		
+		public Cell GetCellAt(int row, int col)
+		{
+			return this.cells[row,col];
+		}
 		public Cell GetCellAt(Coords coords)
 		{
-			return this.cells[coords.Row, coords.Col];
+			return GetCellAt(coords.Row, coords.Col);
+		}
+		public Cell this[int row, int col]
+		{
+			get { return GetCellAt(row, col); }
+		}
+		public Cell this[Coords coords]
+		{
+			get { return GetCellAt(coords); }
 		}
 		
 		public int Height { get { return cells.GetLength(0); } }
