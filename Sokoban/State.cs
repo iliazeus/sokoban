@@ -40,6 +40,17 @@ namespace Sokoban
 			return true;
 		}
 		
+		public bool CheckWinCondition()
+		{
+			if (! Validate()) return false;
+			foreach (var boxCoords in BoxesCoords) {
+				if (Field.GetCellAt(boxCoords) != Field.Cell.Target) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
 		public object Clone()
 		{
 			return new State(Field,

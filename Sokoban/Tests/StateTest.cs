@@ -67,6 +67,21 @@ namespace Sokoban.Tests
 		}
 		
 		[Test]
+		public void TestWinCondition()
+		{
+			var targetCoords = new Coords[] {
+				new Coords(0, 1), new Coords(1, 1)
+			};
+			var winState = new State(field, new Coords(0, 0), targetCoords);
+			var justState = new State(field, validPlayerCoords, validBoxesCoords);
+			var invalidState = new State(field, invalidPlayerCoords, invalidBoxesCoords);
+			
+			Assert.That(winState.CheckWinCondition());
+			Assert.That(! justState.CheckWinCondition());
+			Assert.That(! invalidState.CheckWinCondition());
+		}
+		
+		[Test]
 		public void TestParsing()
 		{
 			string data =
