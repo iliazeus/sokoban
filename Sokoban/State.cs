@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Sokoban
 {
@@ -69,6 +71,69 @@ namespace Sokoban
 				}
 			}
 			return hashCode;
+		}
+		
+		public static State ParseFrom(TextReader reader)
+		{
+			var lines = new List<string>();
+			int maxLineLength = 0;
+			
+			string line;
+			while (! string.IsNullOrEmpty(line = reader.ReadLine())) {
+				lines.Add(line);
+				if (maxLineLength < line.Length) maxLineLength = line.Length;
+			}
+			
+			int height = lines.Count, width = maxLineLength;
+			var cells = new Field.Cell[height, width];
+			var playerCoords = new List<Coords>();
+			var boxesCoords = new List<Coords>();
+			
+			for (int row = 0; row < height; row++) {
+				for (int col = 0; col < width; col++) {
+					if (col >= lines[row].Length) {
+						cells[row,col] = Field.Cell.Wall;
+						continue;
+					}
+					switch (lines[row][col]) {
+						case '.':
+							cells[row,col] = Field.Cell.Empty;
+							break;
+						case '#':
+							cells[row,col] = Field.Cell.Wall;
+							break;
+						case 'X':
+							cells[row,col] = Field.Cell.Target;
+							break;
+						case '@':
+							cells[row,col] = Field.Cell.Empty;
+							playerCoords.Add(new Coords(row, col));
+							break;
+						case 'B':
+							cells[row,col] = Field.Cell.Empty;
+							boxesCoords.Add(new Coords(row, col));
+							break;
+						case 'O':
+							cells[row,col] = Field.Cell.Target;
+							boxesCoords.Add(new Coords(row, col));
+							break;
+						default:
+							throw new FormatException("unexpected character");
+					}
+				}
+			}
+			
+			if (playerCoords.Count == 0) {
+				throw new FormatException("no starting position specified");
+			}
+			if (playerCoords.Count > 1) {
+				throw new FormatException("multiple starting positions specified");
+			}
+			
+			var field = new Field(cells);
+			var state = new State(field, playerCoords[0], boxesCoords.ToArray());
+			
+			return state;
 		}
 	}
 }

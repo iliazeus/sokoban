@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using NUnit.Framework;
 
 namespace Sokoban.Tests
@@ -63,6 +64,44 @@ namespace Sokoban.Tests
 			
 			Assert.That(! new State(field, validBoxesCoords[0], validBoxesCoords)
 			            .Validate());
+		}
+		
+		[Test]
+		public void TestParsing()
+		{
+			string data =
+				"########\n" +
+				"#..@..#\n" + 
+				"#XBO.#\n" +
+				"#####";
+			var state = State.ParseFrom(new StringReader(data));
+			
+			Assert.That(state.PlayerCoords,
+			            Is.EqualTo(new Coords(1, 3)));
+			
+			var expectedBoxesCoords = new Coords[] {
+				new Coords(2, 2), new Coords(2, 3)
+			};
+			Assert.That(state.BoxesCoords,
+			            Is.EquivalentTo(expectedBoxesCoords));
+			
+			Assert.That(state.Field.GetCellAt(new Coords(2, 0)),
+			            Is.EqualTo(Field.Cell.Wall));
+			Assert.That(state.Field.GetCellAt(new Coords(2, 1)),
+			            Is.EqualTo(Field.Cell.Target));
+			Assert.That(state.Field.GetCellAt(new Coords(2, 2)),
+			            Is.EqualTo(Field.Cell.Empty));
+			
+			Assert.That(state.Validate());
+		}
+		
+		[Test]
+		public void TestParsingExceptions()
+		{
+			Assert.Throws(typeof(FormatException),
+			              () => State.ParseFrom(new StringReader("@@@")));
+			Assert.Throws(typeof(FormatException),
+			              () => State.ParseFrom(new StringReader("##FooBar")));
 		}
 	}
 }
