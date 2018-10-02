@@ -36,5 +36,11 @@
 		public static bool operator !=(Coords lhs, Coords rhs) {
 			return !(lhs == rhs);
 		}
+		
+		public override string ToString()
+		{
+			return string.Format("Coords({0}, {1})", Row, Col);
+		}
+
 	}
 }
