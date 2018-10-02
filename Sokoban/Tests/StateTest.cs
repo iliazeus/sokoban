@@ -43,7 +43,7 @@ namespace Sokoban.Tests
 		public void TestCloning()
 		{
 			var s1 = new State(field, validPlayerCoords, validBoxesCoords);
-			var s2 = (State) s1.Clone();
+			var s2 = s1.Clone();
 			
 			Assert.That(s1, Is.EqualTo(s2));
 			Assert.That(s1, Is.Not.SameAs(s2));
@@ -88,15 +88,15 @@ namespace Sokoban.Tests
 			                           new Coords(0, 0),
 			                           new Coords[] { new Coords(0, 2) });
 			
-			var leftState = (State) state.Clone();
+			var leftState = state.Clone();
 			leftState.ApplyMove(Move.Left);
 			Assert.That(leftState, Is.EqualTo(expectedLeftState));
 			
-			var rightState = (State) state.Clone();
+			var rightState = state.Clone();
 			rightState.ApplyMove(Move.Right);
 			Assert.That(leftState, Is.EqualTo(expectedRightState));
 			
-			var sameState = (State) state.Clone();
+			var sameState = state.Clone();
 			sameState.ApplyMoveSequence(new Move[] { Move.Left, Move.Right });
 			Assert.That(sameState, Is.EqualTo(state));
 		}

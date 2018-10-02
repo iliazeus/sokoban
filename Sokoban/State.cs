@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Sokoban
 {
-	public class State : ICloneable
+	public class State
 	{
 		public Field Field { get; set; }
 		
@@ -76,7 +76,7 @@ namespace Sokoban
 		
 		public bool ValidateMoveSequence(IEnumerable<Move> sequence)
 		{
-			var state = (State) Clone();
+			var state = Clone();
 			foreach (var move in sequence) {
 				if (! state.ValidateMove(move)) return false;
 				state.ApplyMove(move);
@@ -103,7 +103,7 @@ namespace Sokoban
 			}
 		}
 		
-		public object Clone()
+		public State Clone()
 		{
 			return new State(Field,
 			                 PlayerCoords, (Coords[])BoxesCoords.Clone());
