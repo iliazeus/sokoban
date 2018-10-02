@@ -153,5 +153,29 @@ namespace Sokoban.Tests
 			Assert.Throws(typeof(FormatException),
 			              () => State.ParseFrom(new StringReader("##FooBar")));
 		}
+		
+		[Test]
+		public void TestPrinting()
+		{
+			string data0 =
+				"########\n" +
+				"#..@..#\n" + 
+				"#XBO.#\n" +
+				"#####";
+			
+			var state1 = State.ParseFrom(new StringReader(data0));
+			
+			var writer1 = new StringWriter();
+			state1.PrintTo(writer1);
+			string data1 = writer1.ToString();
+			
+			var state2 = State.ParseFrom(new StringReader(data1));
+			
+			var writer2 = new StringWriter();
+			state2.PrintTo(writer2);
+			string data2 = writer2.ToString();
+			
+			Assert.That(data1, Is.EqualTo(data2));
+		}
 	}
 }

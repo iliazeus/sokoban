@@ -198,5 +198,29 @@ namespace Sokoban
 			
 			return state;
 		}
+		
+		public void PrintTo(TextWriter writer)
+		{
+			char[][] lines = new char[Field.Height][];
+			for (int row = 0; row < Field.Height; row++) {
+				lines[row] = new char[Field.Width];
+				for (int col = 0; col < Field.Width; col++) {
+					switch (Field.GetCellAt(row, col)) {
+						case Field.Cell.Empty: lines[row][col] = '.'; break;
+						case Field.Cell.Wall: lines[row][col] = '#'; break;
+						case Field.Cell.Target: lines[row][col] = 'X'; break;
+					}
+				}
+			}
+			lines[PlayerCoords.Row][PlayerCoords.Col] = '@';
+			foreach (var boxCoords in BoxesCoords) {
+				if (Field.GetCellAt(boxCoords) == Field.Cell.Target) {
+					lines[boxCoords.Row][boxCoords.Col] = 'O';
+				} else {
+					lines[boxCoords.Row][boxCoords.Col] = 'B';
+				}
+			}
+			foreach (char[] line in lines) writer.WriteLine(line);
+		}
 	}
 }
