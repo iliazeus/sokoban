@@ -6,10 +6,10 @@ namespace Sokoban
 {
 	public class State
 	{
-		public Field Field { get; set; }
+		public Field Field { get; private set; }
 		
-		public Coords PlayerCoords { get; set; }
-		public Coords[] BoxesCoords { get; set; }
+		public Coords PlayerCoords { get; private set; }
+		public Coords[] BoxesCoords { get; private set; }
 		
 		public State(Field field,
 		             Coords playerCoords, Coords[] boxesCoords)
@@ -18,6 +18,7 @@ namespace Sokoban
 			PlayerCoords = playerCoords;
 			BoxesCoords = (Coords[]) boxesCoords.Clone();
 		}
+		private State() {}
 		
 		public bool Validate()
 		{
@@ -79,28 +80,30 @@ namespace Sokoban
 			var state = Clone();
 			foreach (var move in sequence) {
 				if (! state.ValidateMove(move)) return false;
-				state.ApplyMove(move);
+				state = state.ApplyMove(move);
 			}
 			return true;
 		}
 		
-		public void ApplyMove(Move move)
+		public State ApplyMove(Move move)
 		{
 			if (! ValidateMove(move)) {
 				throw new InvalidOperationException("invalid move");
 			}
-			PlayerCoords = new Coords(PlayerCoords, move);
-			for (int i = 0; i < BoxesCoords.Length; i++) {
-				if (BoxesCoords[i] != PlayerCoords) continue;
-				BoxesCoords[i] = new Coords(BoxesCoords[i], move);
+			var result = Clone();
+			result.PlayerCoords = new Coords(PlayerCoords, move);
+			for (int i = 0; i < result.BoxesCoords.Length; i++) {
+				if (result.BoxesCoords[i] != result.PlayerCoords) continue;
+				result.BoxesCoords[i] = new Coords(result.BoxesCoords[i], move);
 			}
+			return result;
 		}
 		
-		public void ApplyMoveSequence(IEnumerable<Move> sequence)
+		public State ApplyMoveSequence(IEnumerable<Move> sequence)
 		{
-			foreach (var move in sequence) {
-				ApplyMove(move);
-			}
+			var state = Clone();
+			foreach (var move in sequence) state = state.ApplyMove(move);
+			return state;
 		}
 		
 		public State Clone()

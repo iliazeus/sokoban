@@ -85,20 +85,17 @@ namespace Sokoban.Tests
 			                          new Coords(0, 0),
 			                          new Coords[] { new Coords(0, 2) });
 			var expectedRightState = new State(state.Field,
-			                           new Coords(0, 0),
-			                           new Coords[] { new Coords(0, 2) });
+			                           new Coords(0, 2),
+			                           new Coords[] { new Coords(0, 3) });
 			
-			var leftState = state.Clone();
-			leftState.ApplyMove(Move.Left);
-			Assert.That(leftState, Is.EqualTo(expectedLeftState));
+			Assert.That(state.ApplyMove(Move.Left),
+			            Is.EqualTo(expectedLeftState));
+						
+			Assert.That(state.ApplyMove(Move.Right),
+			            Is.EqualTo(expectedRightState));
 			
-			var rightState = state.Clone();
-			rightState.ApplyMove(Move.Right);
-			Assert.That(leftState, Is.EqualTo(expectedRightState));
-			
-			var sameState = state.Clone();
-			sameState.ApplyMoveSequence(new Move[] { Move.Left, Move.Right });
-			Assert.That(sameState, Is.EqualTo(state));
+			Assert.That(state.ApplyMoveSequence(new []{Move.Left, Move.Right}),
+			            Is.EqualTo(state));
 		}
 		
 		[Test]
