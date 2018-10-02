@@ -52,5 +52,29 @@ namespace Sokoban.Tests
 			Assert.Throws(typeof(FormatException),
 			              () => PuzzleMetadata.ParseFrom(invalidCreationDate));
 		}
+		
+		[Test]
+		public void TestPrinting()
+		{
+			string data0 =
+				"Name: Test #01: FooBar\n" +
+				"AuthorName : John Doe\n" +
+				"AuthorEmail : jdoe@example.com\n" +
+				"CreationDate: 2018-10-03 10:00";
+			
+			var meta1 = PuzzleMetadata.ParseFrom(new StringReader(data0));
+			
+			var writer1 = new StringWriter();
+			meta1.PrintTo(writer1);
+			var data1 = writer1.ToString();
+			
+			var meta2 = PuzzleMetadata.ParseFrom(new StringReader(data1));
+			
+			var writer2 = new StringWriter();
+			meta2.PrintTo(writer2);
+			var data2 = writer2.ToString();
+			
+			Assert.That(data1, Is.EqualTo(data2));
+		}
 	}
 }

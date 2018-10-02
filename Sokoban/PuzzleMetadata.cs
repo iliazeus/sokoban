@@ -48,9 +48,24 @@ namespace Sokoban
 			return result;
 		}
 		
+		public Dictionary<string, string> ToDictionary()
+		{
+			var result = new Dictionary<string, string>();
+			if (Name != null) result.Add("Name", Name);
+			if (AuthorName != null) result.Add("AuthorName", AuthorName);
+			if (AuthorEmail != null) result.Add("AuthorEmail", AuthorEmail);
+			if (CreationDate != null) result.Add("CreationDate", CreationDate.ToString());
+			return result;
+		}
+		
 		public static PuzzleMetadata ParseFrom(TextReader reader)
 		{
 			return FromDictionary(DictionaryExtensions.ParseFrom(reader));
+		}
+		
+		public void PrintTo(TextWriter writer)
+		{
+			ToDictionary().PrintTo(writer);
 		}
 	}
 }
