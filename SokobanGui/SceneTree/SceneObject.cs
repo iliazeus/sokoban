@@ -1,9 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace SokobanGui
+namespace SokobanGui.SceneTree
 {
-	public abstract class GameObject : INotifyPropertyChanged
+	public enum ObjectType
+	{
+		Player, Box, Tile
+	}
+	
+	public abstract class SceneObject : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void NotifyPropertyChanged(string propertyName)
@@ -13,12 +18,9 @@ namespace SokobanGui
 			}
 		}
 		
-		private Sokoban.State state;
-		public virtual Sokoban.State State
-		{
-			get { return state; }
-			set { state = value; NotifyPropertyChanged("State"); }
-		}
+		protected GameSession session;
+		
+		public abstract ObjectType ObjectType { get; }
 		
 		private int row;
 		public int Row
@@ -33,12 +35,14 @@ namespace SokobanGui
 			get { return column; }
 			protected set { column = value; NotifyPropertyChanged("Column"); }
 		}
+
+		protected virtual void session_StateChanged(
+			object sender, GameSession.StateChangedEventArgs e) {}
 		
-		public GameObject(Sokoban.State state, int row = 0, int column = 0)
+		protected SceneObject(GameSession session)
 		{
-			Row = row;
-			Column = column;
-			State = state;
+			this.session = session;
+			session.StateChanged += session_StateChanged;
 		}
 	}
 }

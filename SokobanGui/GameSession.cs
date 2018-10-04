@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 
@@ -16,6 +15,36 @@ namespace SokobanGui
 			}
 		}
 		
+		public event EventHandler<StateChangedEventArgs> StateChanged;
+		private void OnStateChanged(Sokoban.State oldState,
+		                            Sokoban.Move move,
+		                            Sokoban.State newState,
+		                            bool isUndo = false)
+		{
+			if (StateChanged != null) {
+				StateChanged(this, new StateChangedEventArgs(
+					oldState, move, newState, isUndo));
+			}
+		}
+		public class StateChangedEventArgs : EventArgs
+		{
+			public Sokoban.State OldState { get; private set; }
+			public Sokoban.Move Move { get; private set; }
+			public Sokoban.State NewState { get; private set; }
+			public bool IsUndo { get; private set; }
+			
+			public StateChangedEventArgs(Sokoban.State oldState,
+										 Sokoban.Move move,
+										 Sokoban.State newState,
+										 bool isUndo = false)
+			{
+				OldState = oldState;
+				Move = move;
+				NewState = newState;
+				IsUndo = isUndo;
+			}
+		}
+		
 		public Sokoban.Puzzle Puzzle { get; private set; }
 		
 		private Sokoban.State currentState;
@@ -25,9 +54,6 @@ namespace SokobanGui
 			private set
 			{
 				currentState = value;
-				foreach (var gameObject in GameObjects) {
-					gameObject.State = value;
-				}
 				NotifyPropertyChanged("CurrentState");
 			}
 		}
@@ -36,28 +62,16 @@ namespace SokobanGui
 		private LinkedList<Sokoban.State> undoStack;
 		private const int maxUndoStackSize = 100;
 		
-		public ObservableCollection<GameObject> GameObjects { get; private set; }
-		public ObservableCollection<TileObject> Tiles { get; private set; }
+		public SceneTree.Scene Scene { get; private set; }
 		
 		public GameSession(Sokoban.Puzzle puzzle)
 		{
-			GameObjects = new ObservableCollection<GameObject>();
-			Tiles = new ObservableCollection<TileObject>();
 			Puzzle = puzzle;
 			CurrentState = Puzzle.InitialState;
 			moves = new LinkedList<Sokoban.Move>();
 			undoStack = new LinkedList<Sokoban.State>();
 			
-			for (int row = 0; row < CurrentState.Field.Height; row++) {
-				for (int col = 0; col < CurrentState.Field.Width; col++) {
-					Tiles.Add(new TileObject(CurrentState, row, col));
-				}
-			}
-			
-			GameObjects.Add(new PlayerObject(CurrentState));
-			for (int i = 0; i < CurrentState.BoxesCoords.Length; i++) {
-				GameObjects.Add(new BoxObject(CurrentState, i));
-			}
+			Scene = new SceneTree.Scene(this);
 		}
 		
 		public static GameSession CreateFromStream(Stream stream)
@@ -80,10 +94,12 @@ namespace SokobanGui
 		}
 		public void ApplyMove(Sokoban.Move move)
 		{
+			var oldState = CurrentState;
+			CurrentState = CurrentState.ApplyMove(move);
 			moves.AddLast(move);
 			if (undoStack.Count == maxUndoStackSize) undoStack.RemoveFirst();
-			undoStack.AddLast(CurrentState);
-			CurrentState = CurrentState.ApplyMove(move);
+			undoStack.AddLast(oldState);
+			OnStateChanged(oldState, move, CurrentState);
 		}
 		
 		public bool CanMoveUp { get { return ValidateMove(Sokoban.Move.Up); } }
@@ -99,9 +115,12 @@ namespace SokobanGui
 		public bool CanUndo { get { return undoStack.Count > 0; } }
 		public void Undo()
 		{
+			var lastMove = moves.Last.Value;
 			moves.RemoveLast();
+			var lastState = CurrentState;
 			CurrentState = undoStack.Last.Value;
 			undoStack.RemoveLast();
+			OnStateChanged(lastState, lastMove, CurrentState, isUndo: true);
 		}
 		
 		public Sokoban.Solution MakeSolution()
