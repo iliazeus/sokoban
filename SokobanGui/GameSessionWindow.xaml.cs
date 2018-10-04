@@ -12,9 +12,11 @@ namespace SokobanGui
 {
 	public partial class GameSessionWindow : Window
 	{
-		public GameSessionWindow()
+		public GameSessionWindow(GameSession session)
 		{
 			InitializeComponent();
+			
+			this.DataContext = session;
 		}
 	}
 }
