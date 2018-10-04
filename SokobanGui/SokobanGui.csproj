@@ -71,6 +71,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BoxObject.cs" />
+    <Compile Include="Controls\EvenGrid.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameSession.cs" />
     <Compile Include="PlayerObject.cs" />
@@ -99,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Levels" />
+    <Folder Include="Controls" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
