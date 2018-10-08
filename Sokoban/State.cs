@@ -184,6 +184,10 @@ namespace Sokoban
 							cells[row,col] = Field.Cell.Target;
 							boxesCoords.Add(new Coords(row, col));
 							break;
+						case 'A':
+							cells[row,col] = Field.Cell.Target;
+							playerCoords.Add(new Coords(row, col));
+							break;
 						default:
 							throw new FormatException("unexpected character");
 					}
@@ -216,7 +220,11 @@ namespace Sokoban
 					}
 				}
 			}
-			lines[PlayerCoords.Row][PlayerCoords.Col] = '@';
+			if (Field.GetCellAt(PlayerCoords) == Field.Cell.Target) {
+				lines[PlayerCoords.Row][PlayerCoords.Col] = 'A';
+			} else {
+				lines[PlayerCoords.Row][PlayerCoords.Col] = '@';
+			}
 			foreach (var boxCoords in BoxesCoords) {
 				if (Field.GetCellAt(boxCoords) == Field.Cell.Target) {
 					lines[boxCoords.Row][boxCoords.Col] = 'O';
