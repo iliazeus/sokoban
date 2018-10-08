@@ -112,11 +112,9 @@ namespace Sokoban
 			                 PlayerCoords, (Coords[])BoxesCoords.Clone());
 		}
 		
-		public override bool Equals(object obj)
+		public bool Equals(State other)
 		{
-			State other = obj as State;
 			if (other == null) return false;
-			
 			if (this.PlayerCoords != other.PlayerCoords) return false;
 			if (this.BoxesCoords.Length != other.BoxesCoords.Length) return false;
 			for (int i = 0; i < this.BoxesCoords.Length; i++) {
@@ -124,7 +122,10 @@ namespace Sokoban
 			}
 			return true;
 		}
-
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as State);
+		}
 		public override int GetHashCode()
 		{
 			int hashCode = 0;
