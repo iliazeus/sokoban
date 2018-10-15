@@ -58,8 +58,8 @@ namespace SokobanGui
 			}
 		}
 		
-		private LinkedList<Sokoban.Move> moves;
-		private LinkedList<Sokoban.State> undoStack;
+		private LinkedList<Sokoban.Move> moves, redoMoves;
+		private LinkedList<Sokoban.State> undoStack, redoStack;
 		private const int maxUndoStackSize = 100;
 		
 		public SceneTree.Scene Scene { get; private set; }
@@ -69,7 +69,9 @@ namespace SokobanGui
 			Puzzle = puzzle;
 			CurrentState = Puzzle.InitialState;
 			moves = new LinkedList<Sokoban.Move>();
+			redoMoves = new LinkedList<Sokoban.Move>();
 			undoStack = new LinkedList<Sokoban.State>();
+			redoStack = new LinkedList<Sokoban.State>();
 			
 			Scene = new SceneTree.Scene(this);
 		}
@@ -84,7 +86,9 @@ namespace SokobanGui
 		public void Reset()
 		{
 			moves.Clear();
+			redoMoves.Clear();
 			undoStack.Clear();
+			redoStack.Clear();
 			CurrentState = Puzzle.InitialState;
 		}
 		
@@ -92,14 +96,20 @@ namespace SokobanGui
 		{
 			return CurrentState.ValidateMove(move);
 		}
+		
 		public void ApplyMove(Sokoban.Move move)
 		{
 			var oldState = CurrentState;
-			CurrentState = CurrentState.ApplyMove(move);
-			moves.AddLast(move);
+			var newState = oldState.ApplyMove(move);
+			
+			redoStack.Clear();
+			redoMoves.Clear();
 			if (undoStack.Count == maxUndoStackSize) undoStack.RemoveFirst();
 			undoStack.AddLast(oldState);
-			OnStateChanged(oldState, move, CurrentState);
+			moves.AddLast(move);
+			
+			CurrentState = newState;
+			OnStateChanged(oldState, move, newState);
 		}
 		
 		public bool CanMoveUp { get { return ValidateMove(Sokoban.Move.Up); } }
@@ -115,12 +125,34 @@ namespace SokobanGui
 		public bool CanUndo { get { return undoStack.Count > 0; } }
 		public void Undo()
 		{
-			var lastMove = moves.Last.Value;
-			moves.RemoveLast();
-			var lastState = CurrentState;
-			CurrentState = undoStack.Last.Value;
+			var oldState = CurrentState;
+			var newState = undoStack.Last.Value;
+			var move = moves.Last.Value;
+			
 			undoStack.RemoveLast();
-			OnStateChanged(lastState, lastMove, CurrentState, isUndo: true);
+			redoStack.AddLast(oldState);
+			moves.RemoveLast();
+			redoMoves.AddLast(move);
+			
+			CurrentState = newState;
+			OnStateChanged(oldState, move, newState, isUndo: true);
+		}
+		
+		public bool CanRedo { get { return redoStack.Count > 0; } }
+		public void Redo()
+		{
+			var oldState = CurrentState;
+			var newState = redoStack.Last.Value;
+			var move = redoMoves.Last.Value;
+			
+			redoStack.RemoveLast();
+			if (undoStack.Count == maxUndoStackSize) undoStack.RemoveFirst();
+			undoStack.AddLast(oldState);
+			redoMoves.RemoveLast();
+			moves.AddLast(move);
+			
+			CurrentState = newState;
+			OnStateChanged(oldState, move, newState);
 		}
 		
 		public Sokoban.Solution MakeSolution()
