@@ -50,9 +50,7 @@
 			<Label Grid.Row="1" Grid.Column="1" Content="{Binding AuthorName}" />
 		</Grid>
 	
-		<Viewbox Stretch="Uniform"
-		         RenderOptions.BitmapScalingMode="NearestNeighbor"
-		>
+		<Viewbox Stretch="Uniform" SnapsToDevicePixels="True">
 			<Grid>
 				<ItemsControl ItemsSource="{Binding Scene.Layers[0]}">
 					<ItemsControl.ItemsPanel>
@@ -70,19 +68,19 @@
 								<DataTrigger Binding="{Binding TileType}" Value="0">
 									<Setter TargetName="image"
 									        Property="Source"
-									        Value="Images\EmptyTile.png"
+									        Value="{StaticResource EmptyTileImage}"
 									/>
 								</DataTrigger>
 								<DataTrigger Binding="{Binding TileType}" Value="1">
 									<Setter TargetName="image"
 									        Property="Source"
-									        Value="Images\WallTile.png"
+									        Value="{StaticResource WallTileImage}"
 									/>
 								</DataTrigger>
 								<DataTrigger Binding="{Binding TileType}" Value="2">
 									<Setter TargetName="image"
 									        Property="Source"
-									        Value="Images\TargetTile.png"
+									        Value="{StaticResource TargetTileImage}"
 									/>
 								</DataTrigger>
 							</DataTemplate.Triggers>
@@ -113,13 +111,13 @@
 								<DataTrigger Binding="{Binding ObjectType}" Value="0">
 									<Setter TargetName="image"
 									        Property="Source"
-									        Value="Images\Player.png"
+									        Value="{StaticResource PlayerImage}"
 									/>
 								</DataTrigger>
 								<DataTrigger Binding="{Binding ObjectType}" Value="1">
 									<Setter TargetName="image"
 									        Property="Source"
-									        Value="Images\Box.png"
+									        Value="{StaticResource BoxImage}"
 									/>
 								</DataTrigger>
 							</DataTemplate.Triggers>

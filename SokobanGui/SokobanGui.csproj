@@ -86,14 +86,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="GameSessionWindow.xaml" />
+    <Page Include="Images.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Resource Include="Images\EmptyTile.png" />
-    <Resource Include="Images\TargetTile.png" />
-    <Resource Include="Images\WallTile.png" />
-    <Resource Include="Images\Box.png" />
-    <Resource Include="Images\Player.png" />
     <None Include="Levels\Level01.puz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -105,7 +101,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images" />
     <Folder Include="Levels" />
     <Folder Include="Controls" />
     <Folder Include="SceneTree" />
