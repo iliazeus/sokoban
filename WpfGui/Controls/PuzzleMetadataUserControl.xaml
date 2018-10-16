@@ -10,12 +10,15 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		
 		<Label Grid.Row="0" Grid.Column="0" Content="Уровень:" />
 		<Label Grid.Row="0" Grid.Column="1" Content="{Binding Name}" />
 		<Label Grid.Row="1" Grid.Column="0" Content="Автор:" />
 		<Label Grid.Row="1" Grid.Column="1" Content="{Binding AuthorName}" />
+		<Label Grid.Row="2" Grid.Column="0" Content="Сложность: " />
+		<Label Grid.Row="2" Grid.Column="1" Content="{Binding Difficulty}" />
 	</Grid>
 
 </UserControl>
