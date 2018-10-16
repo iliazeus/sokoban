@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 
-using Sokoban;
+using Sokoban.Core;
 
-namespace ToyApp
+namespace Sokoban.ToyApp
 {
 	class Program
 	{

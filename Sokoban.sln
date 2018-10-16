@@ -2,11 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 # SharpDevelop 5.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sokoban", "Sokoban\Sokoban.csproj", "{06C7B6A6-7317-405F-A32B-095E5989E6CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Sokoban.Core.csproj", "{06C7B6A6-7317-405F-A32B-095E5989E6CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyApp", "ToyApp\ToyApp.csproj", "{1D83A2E8-8C80-4A49-9C9D-36304939E6D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyApp", "ToyApp\Sokoban.ToyApp.csproj", "{1D83A2E8-8C80-4A49-9C9D-36304939E6D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SokobanGui", "SokobanGui\SokobanGui.csproj", "{A068681D-3961-4A0B-B6E0-0EBC703D26A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGui", "WpfGui\Sokoban.WpfGui.csproj", "{A068681D-3961-4A0B-B6E0-0EBC703D26A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
