@@ -34,21 +34,10 @@
 	
 	<DockPanel LastChildFill="True">
 		
-		<Grid DataContext="{Binding Puzzle.Metadata}" DockPanel.Dock="Top">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
-			
-			<Label Grid.Row="0" Grid.Column="0" Content="Уровень:" />
-			<Label Grid.Row="0" Grid.Column="1" Content="{Binding Name}" />
-			<Label Grid.Row="1" Grid.Column="0" Content="Автор:" />
-			<Label Grid.Row="1" Grid.Column="1" Content="{Binding AuthorName}" />
-		</Grid>
+		<local:PuzzleMetadataUserControl
+			DataContext="{Binding Puzzle.Metadata}"
+			DockPanel.Dock="Top"
+		/>
 	
 		<Viewbox Stretch="Uniform" SnapsToDevicePixels="True">
 			<Grid>
