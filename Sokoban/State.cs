@@ -159,7 +159,7 @@ namespace Sokoban
 			for (int row = 0; row < height; row++) {
 				for (int col = 0; col < width; col++) {
 					if (col >= lines[row].Length) {
-						cells[row,col] = Field.Cell.Wall;
+						cells[row,col] = Field.Cell.Empty;
 						continue;
 					}
 					switch (lines[row][col]) {
