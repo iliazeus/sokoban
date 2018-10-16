@@ -1,0 +1,12 @@
+Name: Dual
+AuthorName: François Marques
+
+.#######
+.#..@..#
+.#OBOBO#
+.#.XBX.#
+##X.#.X##
+#..OBO..#
+#...O...#
+#..###..#
+####.####

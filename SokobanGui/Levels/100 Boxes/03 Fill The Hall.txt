@@ -1,0 +1,13 @@
+Name: Fill The Hall
+AuthorName: François Marques
+
+..#####
+..#...#
+..#...#
+###.O.###
+#..OXO..#
+#..OXO..#
+#..OXO..#
+###BBB###
+..#.@.#
+..#####

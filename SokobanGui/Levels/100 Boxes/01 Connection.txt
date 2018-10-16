@@ -1,0 +1,13 @@
+Name: Connection
+AuthorName: François Marques
+
+...####
+####..##
+#...B..#
+#..OOO.#
+#..X.X.##
+##.O.O..#
+.##OOO..#
+..#.B.###
+..#.@.#
+..#####

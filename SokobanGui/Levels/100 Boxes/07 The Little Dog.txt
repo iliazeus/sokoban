@@ -1,0 +1,11 @@
+Name: The Little Dog
+AuthorName: François Marques
+
+.####
+##..#####
+#..B..B.#
+#.BOXXO.##
+#..OBBX..#
+#@.OXOX..#
+####...###
+...#####

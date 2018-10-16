@@ -1,0 +1,11 @@
+Name: Zip
+AuthorName: François Marques
+
+#####.####
+#...###..#
+#.B.....@#
+##BOOOOOB##
+#.BXXXXXB.#
+#...#.....#
+########..#
+.......####

@@ -1,0 +1,13 @@
+Name: Opened Circle
+AuthorName: François Marques
+
+..####
+..#..####
+.##@.B..#
+.#.OXO..#
+##.O.O.##
+#..O.O.#
+#..OOO.#
+##.....#
+.####..#
+....####

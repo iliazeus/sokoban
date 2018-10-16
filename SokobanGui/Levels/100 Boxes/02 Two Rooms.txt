@@ -1,0 +1,11 @@
+Name: Two Rooms
+AuthorName: François Marques
+
+.#########
+.#...#...#
+.#.@.#...#
+##BOOBOOB#
+#..#X.X#.##
+#..XOBOX..#
+#.........#
+###########

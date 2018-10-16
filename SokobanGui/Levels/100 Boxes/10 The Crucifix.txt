@@ -1,0 +1,15 @@
+Name: The Crucifix
+AuthorName: François Marques
+
+..#####
+..#.X.#
+###B.B###
+#..B.B..#
+#.X.X.X.#
+###.O.###
+..#.O.#
+..#BXB#
+..#.X.#
+..#BXB#
+..#.+.#
+..#####
