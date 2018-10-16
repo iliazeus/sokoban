@@ -1,4 +1,5 @@
 Name: Two Lines
+Difficulty: 5
 AuthorName: François Marques
 
 ..####

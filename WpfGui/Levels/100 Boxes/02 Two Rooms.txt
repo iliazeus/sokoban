@@ -1,5 +1,6 @@
 Name: Two Rooms
 AuthorName: François Marques
+Difficulty: 5
 
 .#########
 .#...#...#

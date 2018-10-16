@@ -1,5 +1,6 @@
 Name: Dual
 AuthorName: François Marques
+Difficulty: 5
 
 .#######
 .#..@..#

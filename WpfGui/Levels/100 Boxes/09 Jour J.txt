@@ -1,5 +1,6 @@
 Name: Jour J
 AuthorName: François Marques
+Difficulty: 5
 
 ..####
 ..#.@##

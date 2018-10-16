@@ -1,5 +1,6 @@
 Name: Zip
 AuthorName: François Marques
+Difficulty: 5
 
 #####.####
 #...###..#

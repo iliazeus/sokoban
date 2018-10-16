@@ -1,5 +1,6 @@
 Name: The Little Dog
 AuthorName: François Marques
+Difficulty: 5
 
 .####
 ##..#####

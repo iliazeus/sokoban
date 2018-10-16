@@ -1,5 +1,6 @@
 Name: The Crucifix
 AuthorName: François Marques
+Difficulty: 5
 
 ..#####
 ..#.X.#
@@ -11,5 +12,5 @@ AuthorName: François Marques
 ..#BXB#
 ..#.X.#
 ..#BXB#
-..#.+.#
+..#X.X#
 ..#####

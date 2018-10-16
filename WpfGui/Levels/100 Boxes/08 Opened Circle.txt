@@ -1,5 +1,6 @@
 Name: Opened Circle
 AuthorName: François Marques
+Difficulty: 5
 
 ..####
 ..#..####

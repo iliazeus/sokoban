@@ -1,5 +1,6 @@
 Name: Connection
 AuthorName: François Marques
+Difficulty: 5
 
 ...####
 ####..##
