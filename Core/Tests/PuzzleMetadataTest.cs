@@ -16,6 +16,7 @@ namespace Sokoban.Core.Tests
 				"AuthorEmail : jdoe@example.com\n" +
 				"UnknownKeyFooBarBaz: foobar\n" +
 				"CreationDate: 2018-10-03 10:00\n" +
+				"Difficulty: Easy\n" +
 				"\n" +
 				"this is not a part of metadata\n" +
 				"Name : foobar";
@@ -27,6 +28,7 @@ namespace Sokoban.Core.Tests
 			Assert.That(metadata.CreationDate,
 			            Is.EqualTo(new DateTimeOffset(
 			            	new DateTime(2018, 10, 3, 10, 0, 0))));
+			Assert.That(metadata.Difficulty, Is.EqualTo(PuzzleDifficulty.Easy));
 		}
 		
 		[Test]
