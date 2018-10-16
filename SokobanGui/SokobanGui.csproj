@@ -11,6 +11,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <NoWin32Manifest>False</NoWin32Manifest>
+    <ApplicationIcon>appicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -100,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Resource Include="appicon.ico" />
     <None Include="Levels\Level01.puz">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
