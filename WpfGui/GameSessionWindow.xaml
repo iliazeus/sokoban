@@ -30,11 +30,32 @@
 		                CanExecute="RedoCommandBinding_CanExecute"
 		                Executed="RedoCommandBinding_Executed"
 		/>
+		<CommandBinding Command="NavigationCommands.Refresh"
+		                CanExecute="RefreshCommandBinding_CanExecute" 
+		                Executed="RefreshCommandBinding_Executed"
+		/>
+		<CommandBinding Command="ApplicationCommands.Open"
+		                CanExecute="OpenCommandBinding_CanExecute"
+		                Executed="OpenCommandBinding_Executed"
+		/>
 	</Window.CommandBindings>
 	
 	<DockPanel LastChildFill="True"
 	           Background="{x:Static SystemColors.ControlBrush}"
 	>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="_Open puzzle..." Command="ApplicationCommands.Open" />
+				<Separator />
+				<MenuItem Header="_Quit" Command="ApplicationCommands.Close" />
+			</MenuItem>
+			<MenuItem Header="_Game">
+				<MenuItem Header="_Undo" Command="ApplicationCommands.Undo" />
+				<MenuItem Header="_Redo" Command="ApplicationCommands.Redo" />
+				<Separator />
+				<MenuItem Header="Re_set" Command="NavigationCommands.Refresh" />
+			</MenuItem>
+		</Menu>
 		<DockPanel LastChildFill="True"
 		           DataContext="{Binding Session}"
 		>

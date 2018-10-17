@@ -7,6 +7,9 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.IO;
+
+using Microsoft.Win32;
 
 namespace Sokoban.WpfGui
 {
@@ -84,5 +87,34 @@ namespace Sokoban.WpfGui
 		{
 			Session.Redo();
 		}
+		void RefreshCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+		void RefreshCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			var result = MessageBox.Show(
+				caption: "Warning!",
+				messageBoxText: "All progress will be lost.",
+				icon: MessageBoxImage.Warning,
+				button: MessageBoxButton.OKCancel
+			);
+			if (result == MessageBoxResult.OK) {
+				Session.Reset();
+			}
+		}
+		void OpenCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+		void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			var puzzleFilePath = App.ShowOpenPuzzleDialog(this);
+			if (puzzleFilePath == null) return;
+			var newPuzzle = App.ReadPuzzle(puzzleFilePath);
+			if (newPuzzle == null) return;
+			Session = new GameSession(newPuzzle);
+		}
+		
 	}
 }
