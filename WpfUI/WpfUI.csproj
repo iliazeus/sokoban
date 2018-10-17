@@ -76,6 +76,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\EvenGrid.cs" />
+    <Compile Include="Controls\MainLayerObjectUserControl.xaml.cs">
+      <DependentUpon>MainLayerObjectUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controls\MainLayerUserControl.xaml.cs">
       <DependentUpon>MainLayerUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -102,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="AboutWindow.xaml" />
+    <Page Include="Controls\MainLayerObjectUserControl.xaml" />
     <Page Include="Controls\MainLayerUserControl.xaml" />
     <Page Include="Controls\TileLayerUserControl.xaml" />
     <Page Include="GameSessionWindow.xaml" />
