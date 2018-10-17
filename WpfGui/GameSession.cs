@@ -92,6 +92,7 @@ namespace Sokoban.WpfGui
 			undoStack.Clear();
 			redoStack.Clear();
 			CurrentState = Puzzle.InitialState;
+			OnStateChanged(null, Core.Move.Down, Puzzle.InitialState);
 		}
 		
 		public bool ValidateMove(Core.Move move)
