@@ -12,13 +12,22 @@ namespace Sokoban.WpfGui
 {
 	public partial class GameSessionWindow : Window
 	{
-		public GameSession Session { get; private set; }
+		public static readonly DependencyProperty SessionProperty = 
+			DependencyProperty.Register(
+				"Session", typeof(GameSession),
+				typeof(GameSessionWindow)
+			);
+		public GameSession Session
+		{
+			get { return (GameSession) GetValue(SessionProperty); }
+			set { SetValue(SessionProperty, value); }
+		}
 		
 		public GameSessionWindow(GameSession session)
 		{
 			Session = session;
 			InitializeComponent();
-			DataContext = session;
+			DataContext = this;
 		}
 		
 		void MoveUpCommandBinding_CanExecute(object sender,

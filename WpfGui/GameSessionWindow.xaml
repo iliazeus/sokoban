@@ -32,19 +32,23 @@
 		/>
 	</Window.CommandBindings>
 	
-	<DockPanel LastChildFill="True">
-		
-		<local:PuzzleMetadataUserControl
-			DataContext="{Binding Puzzle.Metadata}"
-			DockPanel.Dock="Top"
-		/>
-	
-		<Viewbox Stretch="Uniform" SnapsToDevicePixels="True">
-			<Grid>
-				<local:TileLayerUserControl DataContext="{Binding}" />
-				<local:MainLayerUserControl DataContext="{Binding}" />
-			</Grid>
-		</Viewbox>
-	
+	<DockPanel LastChildFill="True"
+	           Background="{x:Static SystemColors.ControlBrush}"
+	>
+		<DockPanel LastChildFill="True"
+		           DataContext="{Binding Session}"
+		>
+			<local:PuzzleMetadataUserControl
+				DataContext="{Binding Puzzle.Metadata}"
+				DockPanel.Dock="Top"
+			/>
+			<Viewbox Stretch="Uniform" SnapsToDevicePixels="True">
+				<Grid>
+					<local:TileLayerUserControl DataContext="{Binding}" />
+					<local:MainLayerUserControl DataContext="{Binding}" />
+				</Grid>
+			</Viewbox>
+		</DockPanel>
 	</DockPanel>
+
 </Window>
