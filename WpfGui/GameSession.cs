@@ -62,7 +62,7 @@ namespace Sokoban.WpfGui
 		
 		private LinkedList<Core.Move> moves, redoMoves;
 		private LinkedList<Core.State> undoStack, redoStack;
-		private const int maxUndoStackSize = 100;
+		private const int maxUndoStackSize = 1000;
 		
 		public SceneTree.Scene Scene { get; private set; }
 		
