@@ -86,4 +86,17 @@
 			</DrawingGroup>
 		</DrawingImage.Drawing>
 	</DrawingImage>
+	<DrawingImage x:Key="StarImage">
+		<DrawingImage.Drawing>
+			<DrawingGroup>
+				<DrawingGroup.Children>
+					<GeometryDrawing Brush="#FFFFC800" Geometry="F1 M 21.6666,101.333L 27.7221,65.9967L 1.33333,39.4999L 38.0051,34.8056L 54.8333,1.33336L 71.328,34.8056L 108,39.4999L 81.6113,65.9967L 87.3333,101.333L 54.7969,85.3615L 21.6666,101.333 Z ">
+						<GeometryDrawing.Pen>
+							<Pen Thickness="2.66667" LineJoin="Round" Brush="#FF000000"/>
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup.Children>
+			</DrawingGroup>
+		</DrawingImage.Drawing>
+	</DrawingImage>
 </ResourceDictionary>

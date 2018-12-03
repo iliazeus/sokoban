@@ -18,7 +18,10 @@ namespace Sokoban.WpfGui
 		public static readonly DependencyProperty SessionProperty = 
 			DependencyProperty.Register(
 				"Session", typeof(GameSession),
-				typeof(GameSessionWindow)
+				typeof(GameSessionWindow),
+				new PropertyMetadata(
+					propertyChangedCallback: Session_PropertyChanged
+				)
 			);
 		public GameSession Session
 		{
@@ -26,11 +29,43 @@ namespace Sokoban.WpfGui
 			set { SetValue(SessionProperty, value); }
 		}
 		
+		public static void Session_PropertyChanged(
+			DependencyObject d,
+		    DependencyPropertyChangedEventArgs e)
+		{
+			var self = d as GameSessionWindow;
+			var oldSession = e.OldValue as GameSession;
+			var newSession = e.NewValue as GameSession;
+			
+			if (oldSession != null) {
+				oldSession.PuzzleSolved -= self.Session_PuzzleSolved;
+			}
+			if (newSession != null) {
+				newSession.PuzzleSolved += self.Session_PuzzleSolved;
+			}
+		}
+		
 		public GameSessionWindow(GameSession session)
 		{
 			Session = session;
 			InitializeComponent();
 			DataContext = this;
+		}
+		
+		void Session_PuzzleSolved(object sender, EventArgs e)
+		{
+			var popup = new PuzzleSolvedPopUpWindow(Session);
+			var result = popup.ShowDialog();
+			if (result != true) return;
+			var action = popup.Action;
+			switch (action) {
+				case PuzzleSolvedPopUpAction.ExitGame:
+					Environment.Exit(0);
+					break;
+				case PuzzleSolvedPopUpAction.LevelSelect:
+					ApplicationCommands.Open.Execute(null, this);
+					break;
+			}
 		}
 		
 		void MoveUpCommandBinding_CanExecute(object sender,

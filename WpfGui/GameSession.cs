@@ -17,6 +17,7 @@ namespace Sokoban.WpfGui
 			}
 		}
 		
+		public event EventHandler<EventArgs> PuzzleSolved;
 		public event EventHandler<StateChangedEventArgs> StateChanged;
 		private void OnStateChanged(Core.State oldState,
 		                            Core.Move move,
@@ -26,6 +27,11 @@ namespace Sokoban.WpfGui
 			if (StateChanged != null) {
 				StateChanged(this, new StateChangedEventArgs(
 					oldState, move, newState, isUndo));
+			}
+			if (oldState != null && newState != null && PuzzleSolved != null) {
+				if (!oldState.IsWinning && newState.IsWinning) {
+					PuzzleSolved(this, new EventArgs());
+				}
 			}
 		}
 		public class StateChangedEventArgs : EventArgs

@@ -91,6 +91,10 @@
       <SubType>Code</SubType>
       <DependentUpon>GameSessionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PuzzleSolvedPopUpWindow.xaml.cs">
+      <DependentUpon>PuzzleSolvedPopUpWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SceneTree\BoxObject.cs" />
     <Compile Include="SceneTree\PlayerObject.cs" />
     <Compile Include="SceneTree\Scene.cs" />
@@ -103,9 +107,11 @@
     <Page Include="Controls\TileLayerUserControl.xaml" />
     <Page Include="GameSessionWindow.xaml" />
     <Page Include="Images.xaml" />
+    <Page Include="PuzzleSolvedPopUpWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Resource Include="appicon.ico" />
     <None Include="Levels\100 Boxes\01 Connection.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
