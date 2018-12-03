@@ -25,7 +25,7 @@ namespace Sokoban.ToyApp
 			puzzle.PrintTo(Console.Out);
 			
 			var currentState = puzzle.InitialState;
-			while (! currentState.CheckWinCondition()) {
+			while (! currentState.IsWinning) {
 				Console.CursorTop -= currentState.Field.Height;
 				Console.CursorLeft = 0;
 				

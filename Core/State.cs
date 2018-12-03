@@ -11,16 +11,21 @@ namespace Sokoban.Core
 		public Coords PlayerCoords { get; private set; }
 		public Coords[] BoxesCoords { get; private set; }
 		
+		public bool IsValid { get; private set; }
+		public bool IsWinning { get; private set; }
+		
 		public State(Field field,
 		             Coords playerCoords, Coords[] boxesCoords)
 		{
 			Field = field;
 			PlayerCoords = playerCoords;
-			BoxesCoords = (Coords[]) boxesCoords.Clone();
+			BoxesCoords = boxesCoords.Clone() as Coords[];
+			IsValid = Validate();
+			IsWinning = CheckWinCondition();
 		}
 		private State() {}
 		
-		public bool Validate()
+		private bool Validate()
 		{
 			if (! Field.IsInBounds(PlayerCoords)) return false;
 			if (Field.GetCellAt(PlayerCoords) == Field.Cell.Wall) {
@@ -41,9 +46,8 @@ namespace Sokoban.Core
 			return true;
 		}
 		
-		public bool CheckWinCondition()
+		private bool CheckWinCondition()
 		{
-			if (! Validate()) return false;
 			foreach (var boxCoords in BoxesCoords) {
 				if (Field.GetCellAt(boxCoords) != Field.Cell.Target) {
 					return false;
@@ -96,6 +100,8 @@ namespace Sokoban.Core
 				if (result.BoxesCoords[i] != result.PlayerCoords) continue;
 				result.BoxesCoords[i] = new Coords(result.BoxesCoords[i], move);
 			}
+			result.IsValid = result.Validate();
+			result.IsWinning = result.CheckWinCondition();
 			return result;
 		}
 		
@@ -108,8 +114,13 @@ namespace Sokoban.Core
 		
 		public State Clone()
 		{
-			return new State(Field,
-			                 PlayerCoords, (Coords[])BoxesCoords.Clone());
+			var result = new State();
+			result.Field = this.Field;
+			result.PlayerCoords = this.PlayerCoords;
+			result.BoxesCoords = this.BoxesCoords.Clone() as Coords[];
+			result.IsValid = this.IsValid;
+			result.IsWinning = this.IsWinning;
+			return result;
 		}
 		
 		public bool Equals(State other)

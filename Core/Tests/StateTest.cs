@@ -55,15 +55,15 @@ namespace Sokoban.Core.Tests
 		public void TestValidation()
 		{
 			Assert.That(new State(field, validPlayerCoords, validBoxesCoords)
-			            .Validate());
+			            .IsValid);
 			
 			Assert.That(! new State(field, invalidPlayerCoords, validBoxesCoords)
-			            .Validate());
+			            .IsValid);
 			Assert.That(! new State(field, validPlayerCoords, invalidBoxesCoords)
-			            .Validate());
+			            .IsValid);
 			
 			Assert.That(! new State(field, validBoxesCoords[0], validBoxesCoords)
-			            .Validate());
+			            .IsValid);
 		}
 		
 		[Test]
@@ -108,9 +108,9 @@ namespace Sokoban.Core.Tests
 			var justState = new State(field, validPlayerCoords, validBoxesCoords);
 			var invalidState = new State(field, invalidPlayerCoords, invalidBoxesCoords);
 			
-			Assert.That(winState.CheckWinCondition());
-			Assert.That(! justState.CheckWinCondition());
-			Assert.That(! invalidState.CheckWinCondition());
+			Assert.That(winState.IsWinning);
+			Assert.That(! justState.IsWinning);
+			Assert.That(! invalidState.IsWinning);
 		}
 		
 		[Test]
@@ -139,7 +139,7 @@ namespace Sokoban.Core.Tests
 			Assert.That(state.Field.GetCellAt(new Coords(2, 2)),
 			            Is.EqualTo(Field.Cell.Empty));
 			
-			Assert.That(state.Validate());
+			Assert.That(state.IsValid);
 		}
 		
 		[Test]
