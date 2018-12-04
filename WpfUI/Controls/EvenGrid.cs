@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Sokoban.WpfGui.Controls
+namespace Sokoban.WpfUI.Controls
 {
 	public class EvenGrid : Grid
 	{

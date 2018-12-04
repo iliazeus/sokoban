@@ -2,7 +2,7 @@
 
 using Core = Sokoban.Core;
 
-namespace Sokoban.WpfGui.SceneTree
+namespace Sokoban.WpfUI.SceneTree
 {
 	public enum TileType
 	{

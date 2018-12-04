@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Sokoban.WpfGui.SceneTree
+namespace Sokoban.WpfUI.SceneTree
 {
 	public enum ObjectType
 	{

@@ -7,7 +7,7 @@ using System.IO;
 
 using Microsoft.Win32;
 
-namespace Sokoban.WpfGui
+namespace Sokoban.WpfUI
 {
 	public partial class App : Application
 	{

@@ -9,14 +9,14 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Sokoban.WpfGui.Controls
+namespace Sokoban.WpfUI.Controls
 {
 	/// <summary>
-	/// Interaction logic for PuzzleMetadataUserControl.xaml
+	/// Interaction logic for MainLayerUserControl.xaml
 	/// </summary>
-	public partial class PuzzleMetadataUserControl : UserControl
+	public partial class MainLayerUserControl : UserControl
 	{
-		public PuzzleMetadataUserControl()
+		public MainLayerUserControl()
 		{
 			InitializeComponent();
 		}

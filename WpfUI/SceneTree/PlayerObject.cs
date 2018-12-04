@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sokoban.WpfGui.SceneTree
+namespace Sokoban.WpfUI.SceneTree
 {
 	public class PlayerObject : SceneObject
 	{

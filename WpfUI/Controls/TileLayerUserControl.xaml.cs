@@ -9,7 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Sokoban.WpfGui.Controls
+namespace Sokoban.WpfUI.Controls
 {
 	/// <summary>
 	/// Interaction logic for TileLayerUserControl.xaml

@@ -6,7 +6,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Sokoban.Core.c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyApp", "ToyApp\Sokoban.ToyApp.csproj", "{1D83A2E8-8C80-4A49-9C9D-36304939E6D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGui", "WpfGui\Sokoban.WpfGui.csproj", "{A068681D-3961-4A0B-B6E0-0EBC703D26A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfUI", "WpfUI\WpfUI.csproj", "{A068681D-3961-4A0B-B6E0-0EBC703D26A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", "{20D86D90-DEAC-409F-B3BC-0813B30DE1D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,5 +28,9 @@ Global
 		{A068681D-3961-4A0B-B6E0-0EBC703D26A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A068681D-3961-4A0B-B6E0-0EBC703D26A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A068681D-3961-4A0B-B6E0-0EBC703D26A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20D86D90-DEAC-409F-B3BC-0813B30DE1D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20D86D90-DEAC-409F-B3BC-0813B30DE1D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20D86D90-DEAC-409F-B3BC-0813B30DE1D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20D86D90-DEAC-409F-B3BC-0813B30DE1D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

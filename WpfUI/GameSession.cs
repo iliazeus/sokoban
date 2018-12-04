@@ -5,7 +5,7 @@ using System.IO;
 
 using Core = Sokoban.Core;
 
-namespace Sokoban.WpfGui
+namespace Sokoban.WpfUI
 {
 	public class GameSession : INotifyPropertyChanged
 	{
