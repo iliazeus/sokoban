@@ -64,6 +64,8 @@ namespace Sokoban.WpfGui
 		private LinkedList<Core.State> undoStack, redoStack;
 		private const int maxUndoStackSize = 1000;
 		
+		public int MoveCount { get { return moves.Count; } }
+		
 		public SceneTree.Scene Scene { get; private set; }
 		
 		public GameSession(Core.Puzzle puzzle)
