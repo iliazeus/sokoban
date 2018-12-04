@@ -5,9 +5,9 @@ using System.IO;
 
 using Core = Sokoban.Core;
 
-namespace Sokoban.WpfUI
+namespace Sokoban.Game
 {
-	public class GameSession : INotifyPropertyChanged
+	public class Session : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void NotifyPropertyChanged(string propertyName)
@@ -72,7 +72,7 @@ namespace Sokoban.WpfUI
 		
 		public int MoveCount { get { return moves.Count; } }
 		
-		public GameSession(Core.Puzzle puzzle)
+		public Session(Core.Puzzle puzzle)
 		{
 			Puzzle = puzzle;
 			CurrentState = Puzzle.InitialState;
@@ -82,10 +82,10 @@ namespace Sokoban.WpfUI
 			redoStack = new LinkedList<Core.State>();
 		}
 		
-		public static GameSession CreateFromStream(Stream stream)
+		public static Session CreateFromStream(Stream stream)
 		{
 			using (var reader = new StreamReader(stream)) {
-				return new GameSession(Core.Puzzle.ParseFrom(reader));
+				return new Session(Core.Puzzle.ParseFrom(reader));
 			}
 		}
 		

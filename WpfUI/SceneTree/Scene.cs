@@ -13,7 +13,7 @@ namespace Sokoban.WpfUI.SceneTree
 		public int FieldWidth { get; private set; }
 		public int FieldHeight { get; private set; }
 		
-		public Scene(GameSession session)
+		public Scene(Game.Session session)
 		{
 			FieldWidth = session.CurrentState.Field.Width;
 			FieldHeight = session.CurrentState.Field.Height;

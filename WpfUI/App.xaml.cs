@@ -49,7 +49,7 @@ namespace Sokoban.WpfUI
 			if (puzzleFilePath == null) Environment.Exit(0);
 			var puzzle = ReadPuzzle(puzzleFilePath);
 			if (puzzle == null) Environment.Exit(1);
-			new GameSessionWindow(new GameSession(puzzle)).Show();
+			new GameSessionWindow(new Game.Session(puzzle)).Show();
 		}
 	}
 }

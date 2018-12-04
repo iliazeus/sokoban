@@ -8,7 +8,7 @@ namespace Sokoban.WpfUI.SceneTree
 		
 		private readonly int index;
 		
-		public BoxObject(GameSession session, int index) : base(session)
+		public BoxObject(Game.Session session, int index) : base(session)
 		{
 			this.index = index;
 			Row = session.CurrentState.BoxesCoords[index].Row;
@@ -16,7 +16,7 @@ namespace Sokoban.WpfUI.SceneTree
 		}
 		
 		protected override void session_StateChanged(
-			object sender, GameSession.StateChangedEventArgs e)
+			object sender, Game.Session.StateChangedEventArgs e)
 		{
 			Row = e.NewState.BoxesCoords[index].Row;
 			Column = e.NewState.BoxesCoords[index].Col;

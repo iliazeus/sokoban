@@ -6,14 +6,14 @@ namespace Sokoban.WpfUI.SceneTree
 	{
 		public override ObjectType ObjectType { get { return ObjectType.Player; }}
 		
-		public PlayerObject(GameSession session) : base(session)
+		public PlayerObject(Game.Session session) : base(session)
 		{
 			Row = session.CurrentState.PlayerCoords.Row;
 			Column = session.CurrentState.PlayerCoords.Col;
 		}
 		
 		protected override void session_StateChanged(
-			object sender, GameSession.StateChangedEventArgs e)
+			object sender, Game.Session.StateChangedEventArgs e)
 		{
 			Row = e.NewState.PlayerCoords.Row;
 			Column = e.NewState.PlayerCoords.Col;

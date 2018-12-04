@@ -8,7 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Sokoban.WpfGui
+namespace Sokoban.WpfUI
 {
 	public enum PuzzleSolvedPopUpAction
 	{
@@ -18,10 +18,10 @@ namespace Sokoban.WpfGui
 	
 	public partial class PuzzleSolvedPopUpWindow : Window
 	{
-		public GameSession Session { get; private set; }
+		public Game.Session Session { get; private set; }
 		public PuzzleSolvedPopUpAction? Action { get; private set; }
 		
-		public PuzzleSolvedPopUpWindow(GameSession session)
+		public PuzzleSolvedPopUpWindow(Game.Session session)
 		{
 			InitializeComponent();
 			Session = session;

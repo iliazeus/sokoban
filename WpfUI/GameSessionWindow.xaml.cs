@@ -17,15 +17,15 @@ namespace Sokoban.WpfUI
 	{
 		public static readonly DependencyProperty SessionProperty = 
 			DependencyProperty.Register(
-				"Session", typeof(GameSession),
+				"Session", typeof(Game.Session),
 				typeof(GameSessionWindow),
 				new PropertyMetadata(
 					propertyChangedCallback: Session_PropertyChanged
 				)
 			);
-		public GameSession Session
+		public Game.Session Session
 		{
-			get { return (GameSession) GetValue(SessionProperty); }
+			get { return (Game.Session) GetValue(SessionProperty); }
 			set { SetValue(SessionProperty, value); }
 		}
 		
@@ -34,8 +34,8 @@ namespace Sokoban.WpfUI
 		    DependencyPropertyChangedEventArgs e)
 		{
 			var self = d as GameSessionWindow;
-			var oldSession = e.OldValue as GameSession;
-			var newSession = e.NewValue as GameSession;
+			var oldSession = e.OldValue as Game.Session;
+			var newSession = e.NewValue as Game.Session;
 			
 			if (oldSession != null) {
 				oldSession.PuzzleSolved -= self.Session_PuzzleSolved;
@@ -56,7 +56,7 @@ namespace Sokoban.WpfUI
 			set { SetValue(SceneProperty, value); }
 		}
 		
-		public GameSessionWindow(GameSession session)
+		public GameSessionWindow(Game.Session session)
 		{
 			Session = session;
 			Scene = new SceneTree.Scene(Session);
@@ -160,7 +160,7 @@ namespace Sokoban.WpfUI
 			if (puzzleFilePath == null) return;
 			var newPuzzle = App.ReadPuzzle(puzzleFilePath);
 			if (newPuzzle == null) return;
-			Session = new GameSession(newPuzzle);
+			Session = new Game.Session(newPuzzle);
 			Scene = new SceneTree.Scene(Session);
 		}
 		

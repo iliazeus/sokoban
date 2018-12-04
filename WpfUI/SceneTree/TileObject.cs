@@ -20,7 +20,7 @@ namespace Sokoban.WpfUI.SceneTree
 			private set { tileType = value; NotifyPropertyChanged("Type"); }
 		}
 		
-		public TileObject(GameSession session, int row, int column) : base(session)
+		public TileObject(Game.Session session, int row, int column) : base(session)
 		{
 			this.Row = row;
 			this.Column = column;

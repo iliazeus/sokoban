@@ -18,7 +18,7 @@ namespace Sokoban.WpfUI.SceneTree
 			}
 		}
 		
-		protected GameSession session;
+		protected Game.Session session;
 		
 		public abstract ObjectType ObjectType { get; }
 		
@@ -37,9 +37,9 @@ namespace Sokoban.WpfUI.SceneTree
 		}
 
 		protected virtual void session_StateChanged(
-			object sender, GameSession.StateChangedEventArgs e) {}
+			object sender, Game.Session.StateChangedEventArgs e) {}
 		
-		protected SceneObject(GameSession session)
+		protected SceneObject(Game.Session session)
 		{
 			this.session = session;
 			session.StateChanged += session_StateChanged;
