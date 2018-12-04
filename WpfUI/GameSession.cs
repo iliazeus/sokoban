@@ -72,8 +72,6 @@ namespace Sokoban.WpfUI
 		
 		public int MoveCount { get { return moves.Count; } }
 		
-		public SceneTree.Scene Scene { get; private set; }
-		
 		public GameSession(Core.Puzzle puzzle)
 		{
 			Puzzle = puzzle;
@@ -82,8 +80,6 @@ namespace Sokoban.WpfUI
 			redoMoves = new LinkedList<Core.Move>();
 			undoStack = new LinkedList<Core.State>();
 			redoStack = new LinkedList<Core.State>();
-			
-			Scene = new SceneTree.Scene(this);
 		}
 		
 		public static GameSession CreateFromStream(Stream stream)

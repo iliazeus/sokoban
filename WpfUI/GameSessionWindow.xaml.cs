@@ -44,10 +44,22 @@ namespace Sokoban.WpfUI
 				newSession.PuzzleSolved += self.Session_PuzzleSolved;
 			}
 		}
+
+		public static readonly DependencyProperty SceneProperty =
+			DependencyProperty.Register(
+				"Scene", typeof(SceneTree.Scene),
+				typeof(GameSessionWindow)
+			);
+		public SceneTree.Scene Scene
+		{
+			get { return (SceneTree.Scene) GetValue(SceneProperty); }
+			set { SetValue(SceneProperty, value); }
+		}
 		
 		public GameSessionWindow(GameSession session)
 		{
 			Session = session;
+			Scene = new SceneTree.Scene(Session);
 			InitializeComponent();
 			DataContext = this;
 		}
@@ -149,6 +161,7 @@ namespace Sokoban.WpfUI
 			var newPuzzle = App.ReadPuzzle(puzzleFilePath);
 			if (newPuzzle == null) return;
 			Session = new GameSession(newPuzzle);
+			Scene = new SceneTree.Scene(Session);
 		}
 		
 	}

@@ -56,14 +56,14 @@
 				<MenuItem Header="Re_set" Command="NavigationCommands.Refresh" />
 			</MenuItem>
 		</Menu>
-		<DockPanel LastChildFill="True"
-		           DataContext="{Binding Session}"
-		>
+		<DockPanel LastChildFill="True">
 			<local:PuzzleMetadataUserControl
-				DataContext="{Binding Puzzle.Metadata}"
+				DataContext="{Binding Session.Puzzle.Metadata}"
 				DockPanel.Dock="Top"
 			/>
-			<Viewbox Stretch="Uniform" SnapsToDevicePixels="True">
+			<Viewbox Stretch="Uniform" SnapsToDevicePixels="True"
+			         DataContext="{Binding Scene}"
+			>
 				<Grid>
 					<local:TileLayerUserControl DataContext="{Binding}" />
 					<local:MainLayerUserControl DataContext="{Binding}" />

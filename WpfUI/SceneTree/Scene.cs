@@ -10,8 +10,14 @@ namespace Sokoban.WpfUI.SceneTree
 			get; private set;
 		}
 		
+		public int FieldWidth { get; private set; }
+		public int FieldHeight { get; private set; }
+		
 		public Scene(GameSession session)
 		{
+			FieldWidth = session.CurrentState.Field.Width;
+			FieldHeight = session.CurrentState.Field.Height;
+			
 			Layers = new ObservableCollection<ObservableCollection<SceneObject>>();
 			
 			var tileLayer = new ObservableCollection<SceneObject>();
