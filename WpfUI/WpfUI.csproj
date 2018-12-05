@@ -76,10 +76,6 @@
       <DependentUpon>MainLayerUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\PuzzleMetadataUserControl.xaml.cs">
-      <DependentUpon>PuzzleMetadataUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controls\TileLayerUserControl.xaml.cs">
       <DependentUpon>TileLayerUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -102,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\MainLayerUserControl.xaml" />
-    <Page Include="Controls\PuzzleMetadataUserControl.xaml" />
     <Page Include="Controls\TileLayerUserControl.xaml" />
     <Page Include="GameSessionWindow.xaml" />
     <Page Include="Images.xaml" />
