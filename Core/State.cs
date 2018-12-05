@@ -244,6 +244,7 @@ namespace Sokoban.Core
 				}
 			}
 			foreach (char[] line in lines) writer.WriteLine(line);
+			writer.WriteLine();
 		}
 	}
 }
