@@ -83,11 +83,18 @@ namespace Sokoban.Game
 			redoStack = new LinkedList<Core.State>();
 		}
 		
-		public static Session CreateFromStream(Stream stream)
+		public static Session ReadFromStream(Stream stream)
 		{
+			Core.Puzzle puzzle;
+			Core.Solution solution;
 			using (var reader = new StreamReader(stream)) {
-				return new Session(Core.Puzzle.ParseFrom(reader));
+				puzzle = Core.Puzzle.ParseFrom(reader);
+				solution = Core.Solution.ParseFrom(reader);
 			}
+			var result = new Session(puzzle);
+			result.CurrentState = result.CurrentState.ApplyMoveSequence(solution.Moves);
+			result.moves = new LinkedList<Core.Move>(solution.Moves);
+			return result;
 		}
 		
 		public void Reset()
@@ -174,6 +181,13 @@ namespace Sokoban.Game
 		public void WriteSolutionToStream(Stream stream)
 		{
 			using (var writer = new StreamWriter(stream)) {
+				MakeSolution().PrintTo(writer);
+			}
+		}
+		
+		public void WriteToStream(Stream stream) {
+			using (var writer = new StreamWriter(stream)) {
+				Puzzle.PrintTo(writer);
 				MakeSolution().PrintTo(writer);
 			}
 		}
