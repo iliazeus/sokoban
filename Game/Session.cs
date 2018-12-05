@@ -28,6 +28,7 @@ namespace Sokoban.Game
 				StateChanged(this, new StateChangedEventArgs(
 					oldState, move, newState, isUndo));
 			}
+			NotifyPropertyChanged("MoveCount");
 			if (oldState != null && newState != null && PuzzleSolved != null) {
 				if (!oldState.IsWinning && newState.IsWinning) {
 					PuzzleSolved(this, new EventArgs());
