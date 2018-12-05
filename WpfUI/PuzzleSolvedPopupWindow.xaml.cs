@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -39,6 +40,24 @@ namespace Sokoban.WpfUI
 		{
 			Action = PuzzleSolvedPopUpAction.LevelSelect;
 			DialogResult = true;
+		}
+		
+		void SaveSolutionButton_Click(object sender, RoutedEventArgs e)
+		{
+			try {
+				var savePath = App.ShowSaveGameDialog(this);
+				if (savePath == null) return;
+				using (var stream = File.OpenWrite(savePath)) {
+					Session.WriteToStream(stream);
+				}
+			} catch (Exception ex) {
+				MessageBox.Show(
+					caption: "Error",
+					icon: MessageBoxImage.Error,
+					messageBoxText: ex.Message,
+					button: MessageBoxButton.OK
+				);
+			}
 		}
 	}
 }
