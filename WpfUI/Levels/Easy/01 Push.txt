@@ -1,0 +1,9 @@
+﻿Name: Push
+AuthorName: Ilia Pozdnyakov
+Difficulty: 1
+
+#########
+#.......#
+#..@BX..#
+#.......#
+#########

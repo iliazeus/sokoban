@@ -1,0 +1,9 @@
+﻿Name: Corners
+AuthorName: Ilia Pozdnyakov
+Difficulty: 1
+
+########
+#X@B...#
+#B.....#
+#X.....#
+########

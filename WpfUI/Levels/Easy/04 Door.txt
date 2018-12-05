@@ -1,0 +1,9 @@
+﻿Name: Door
+AuthorName: Ilia Pozdnyakov
+Difficulty: 1
+
+#####.#####
+#...#.#...#
+#.BX###XB.#
+#X@..B....#
+###########

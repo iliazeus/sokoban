@@ -110,6 +110,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Levels\Easy\01 Push.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Levels\Easy\02 Corners.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Levels\Easy\03 Storage.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Levels\Easy\04 Door.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Resource Include="appicon.ico" />
     <None Include="Levels\100 Boxes\01 Connection.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -146,6 +158,7 @@
     <Folder Include="Levels" />
     <Folder Include="Controls" />
     <Folder Include="Levels\100 Boxes" />
+    <Folder Include="Levels\Easy" />
     <Folder Include="SceneTree" />
   </ItemGroup>
   <ItemGroup>
