@@ -46,6 +46,10 @@
 		                CanExecute="OpenCommandBinding_CanExecute"
 						Executed="OpenCommandBinding_Executed"
 		/>
+		<CommandBinding Command="ApplicationCommands.Help"
+		                CanExecute="HelpCommandBinding_CanExecute"
+		                Executed="HelpCommandBinding_Executed"
+		/>
 	</Window.CommandBindings>
 	
 	<DockPanel LastChildFill="True">
@@ -65,6 +69,9 @@
 				<MenuItem Header="_Redo" Command="ApplicationCommands.Redo" />
 				<Separator />
 				<MenuItem Header="Re_set" Command="NavigationCommands.Refresh" />
+			</MenuItem>
+			<MenuItem Header="_Help">
+				<MenuItem Header="_About" Command="ApplicationCommands.Help" />
 			</MenuItem>
 		</Menu>
 		<StatusBar DockPanel.Dock="Bottom"

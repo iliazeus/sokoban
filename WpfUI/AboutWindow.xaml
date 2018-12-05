@@ -1,0 +1,40 @@
+<Window x:Class="Sokoban.WpfUI.AboutWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="About" Icon="appicon.ico"
+    WindowStartupLocation="CenterScreen" ShowInTaskbar="False"
+    Height="275" Width="400" ResizeMode="NoResize"
+>
+	<Window.Resources>
+		<Style TargetType="Hyperlink">
+			<Style.Setters>
+				<EventSetter Event="RequestNavigate"
+				             Handler="Hyperlink_RequestNavigate"
+				/>
+			</Style.Setters>
+		</Style>
+	</Window.Resources>
+	<StackPanel Orientation="Vertical" Margin="10">
+		<TextBlock Margin="0,10" TextAlignment="Center">
+			<Run FontSize="20">Sokoban</Run>
+			<LineBreak />
+			<Run FontSize="12">version</Run>
+			<Run FontSize="12" Text="{Binding GameVersion, Mode=OneTime}" />
+		</TextBlock>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<Image Source="{StaticResource BoxImage}" Height="100" />
+			<Image Source="{StaticResource BoxImage}" Height="100" />
+			<Image Source="{StaticResource BoxImage}" Height="100" />
+		</StackPanel>
+		<TextBlock>
+			<Run>A box-pushing puzzle game.</Run>
+			<LineBreak />
+			<Run>Copyright 2018 Ilia Pozdnyakov &lt;</Run>
+			<Hyperlink NavigateUri="mailto:ilia.pozdnyakov@ya.ru">ilia.pozdnyakov@ya.ru</Hyperlink>
+			<Run>&gt;</Run>
+			<LineBreak />
+			<Run>Graphics assets by</Run>
+			<Hyperlink NavigateUri="https://kenney.nl">Kenney</Hyperlink>
+		</TextBlock>
+	</StackPanel>
+</Window>

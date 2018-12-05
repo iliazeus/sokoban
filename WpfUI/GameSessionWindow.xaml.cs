@@ -215,6 +215,14 @@ namespace Sokoban.WpfUI
 			}
 			Scene = new SceneTree.Scene(Session);
 		}
+		void HelpCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+		void HelpCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			new AboutWindow().ShowDialog();
+		}
 		
 	}
 }
