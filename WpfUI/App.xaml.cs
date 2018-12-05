@@ -14,42 +14,61 @@ namespace Sokoban.WpfUI
 		public static string ShowOpenPuzzleDialog(Window owner = null)
 		{
 			var dialog = new OpenFileDialog();
+			dialog.Title = "Open a puzzle file";
 			dialog.InitialDirectory = Environment.CurrentDirectory;
 			if (! dialog.ShowDialog(owner).GetValueOrDefault(false)) return null;
 			return dialog.FileName;
 		}
 		
-		public static Core.Puzzle ReadPuzzle(string path)
+		public static string ShowLoadGameDialog(Window owner = null)
 		{
-			try {
-				using (var reader = File.OpenText(path)) {
-					return Core.Puzzle.ParseFrom(reader);
-				}
-			} catch (Exception e) {
-				MessageBox.Show(
-					caption: "Error",
-					icon: MessageBoxImage.Error,
-					messageBoxText: e.Message,
-					button: MessageBoxButton.OK
-				);
-				return null;
-			}
+			var dialog = new OpenFileDialog();
+			dialog.Title = "Load game";
+			var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+			dialog.InitialDirectory = Path.Combine(appDataPath, "Sokoban");
+			if (! dialog.ShowDialog(owner).GetValueOrDefault(false)) return null;
+			return dialog.FileName;
+		}
+		
+		public static string ShowSaveGameDialog(Window owner = null)
+		{
+			var dialog = new SaveFileDialog();
+			dialog.Title = "Save game";
+			var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+			dialog.InitialDirectory = Path.Combine(appDataPath, "Sokoban");
+			dialog.FileName = "sokoban.txt";
+			dialog.Filter = "All files|*.*";
+			if (! dialog.ShowDialog(owner).GetValueOrDefault(false)) return null;
+			return dialog.FileName;
 		}
 		
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
 			
-			string puzzleFilePath;
-			
-			var args = Environment.GetCommandLineArgs();
-			if (args.Length >= 2) puzzleFilePath = args[1];
-			else puzzleFilePath = ShowOpenPuzzleDialog();
-			
-			if (puzzleFilePath == null) Environment.Exit(0);
-			var puzzle = ReadPuzzle(puzzleFilePath);
-			if (puzzle == null) Environment.Exit(1);
-			new GameSessionWindow(new Game.Session(puzzle)).Show();
+			try {
+				string puzzleFilePath;
+				var args = Environment.GetCommandLineArgs();
+				if (args.Length >= 2) puzzleFilePath = args[1];
+				else puzzleFilePath = ShowOpenPuzzleDialog();
+				if (puzzleFilePath == null) Environment.Exit(0);
+				
+				Game.Session session;
+				using (var stream = File.OpenRead(puzzleFilePath)) {
+					session = Game.Session.ReadFromStream(stream);
+				}
+				
+				new GameSessionWindow(session).Show();
+				
+			} catch (Exception ex) {
+				MessageBox.Show(
+					caption: "Error",
+					icon: MessageBoxImage.Error,
+					messageBoxText: ex.Message,
+					button: MessageBoxButton.OK
+				);
+				Environment.Exit(1);
+			}
 		}
 	}
 }

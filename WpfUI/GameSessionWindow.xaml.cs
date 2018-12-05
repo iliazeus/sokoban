@@ -156,11 +156,20 @@ namespace Sokoban.WpfUI
 		}
 		void NewCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			var puzzleFilePath = App.ShowOpenPuzzleDialog(this);
-			if (puzzleFilePath == null) return;
-			var newPuzzle = App.ReadPuzzle(puzzleFilePath);
-			if (newPuzzle == null) return;
-			Session = new Game.Session(newPuzzle);
+			try {
+				var puzzleFilePath = App.ShowOpenPuzzleDialog();
+				if (puzzleFilePath == null) return;
+				using (var stream = File.OpenRead(puzzleFilePath)) {
+					Session = Game.Session.ReadFromStream(stream);
+				}
+			} catch (Exception ex) {
+				MessageBox.Show(
+					caption: "Error",
+					icon: MessageBoxImage.Error,
+					messageBoxText: ex.Message,
+					button: MessageBoxButton.OK
+				);
+			}
 			Scene = new SceneTree.Scene(Session);
 		}
 		void SaveCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -169,7 +178,20 @@ namespace Sokoban.WpfUI
 		}
 		void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			try {
+				var savePath = App.ShowSaveGameDialog(this);
+				if (savePath == null) return;
+				using (var stream = File.OpenWrite(savePath)) {
+					Session.WriteToStream(stream);
+				}
+			} catch (Exception ex) {
+				MessageBox.Show(
+					caption: "Error",
+					icon: MessageBoxImage.Error,
+					messageBoxText: ex.Message,
+					button: MessageBoxButton.OK
+				);
+			}
 		}
 		void OpenCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
@@ -177,7 +199,21 @@ namespace Sokoban.WpfUI
 		}
 		void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			try {
+				var savePath = App.ShowLoadGameDialog(this);
+				if (savePath == null) return;
+				using (var stream = File.OpenRead(savePath)) {
+					Session = Game.Session.ReadFromStream(stream);
+				}
+			} catch (Exception ex) {
+				MessageBox.Show(
+					caption: "Error",
+					icon: MessageBoxImage.Error,
+					messageBoxText: ex.Message,
+					button: MessageBoxButton.OK
+				);
+			}
+			Scene = new SceneTree.Scene(Session);
 		}
 		
 	}
