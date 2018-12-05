@@ -150,11 +150,11 @@ namespace Sokoban.WpfUI
 				Session.Reset();
 			}
 		}
-		void OpenCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		void NewCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = true;
 		}
-		void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		void NewCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
 		{
 			var puzzleFilePath = App.ShowOpenPuzzleDialog(this);
 			if (puzzleFilePath == null) return;
@@ -162,6 +162,22 @@ namespace Sokoban.WpfUI
 			if (newPuzzle == null) return;
 			Session = new Game.Session(newPuzzle);
 			Scene = new SceneTree.Scene(Session);
+		}
+		void SaveCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+		void SaveCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+		void OpenCommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+		void OpenCommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			throw new NotImplementedException();
 		}
 		
 	}

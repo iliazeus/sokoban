@@ -34,9 +34,17 @@
 		                CanExecute="RefreshCommandBinding_CanExecute" 
 		                Executed="RefreshCommandBinding_Executed"
 		/>
+		<CommandBinding Command="ApplicationCommands.New"
+		                CanExecute="NewCommandBinding_CanExecute"
+		                Executed="NewCommandBinding_Executed"
+		/>
+		<CommandBinding Command="ApplicationCommands.Save"
+		                CanExecute="SaveCommandBinding_CanExecute"
+						Executed="SaveCommandBinding_Executed"
+		/>
 		<CommandBinding Command="ApplicationCommands.Open"
 		                CanExecute="OpenCommandBinding_CanExecute"
-		                Executed="OpenCommandBinding_Executed"
+						Executed="OpenCommandBinding_Executed"
 		/>
 	</Window.CommandBindings>
 	
@@ -45,7 +53,10 @@
 		      BorderThickness="0,0,0,1"
 		      BorderBrush="{x:Static SystemColors.ControlDarkBrush}">
 			<MenuItem Header="_File">
-				<MenuItem Header="_Open puzzle..." Command="ApplicationCommands.Open" />
+				<MenuItem Header="Start _new puzzle..." Command="ApplicationCommands.New" />
+				<Separator />
+				<MenuItem Header="_Save game..." Command="ApplicationCommands.Save" />
+				<MenuItem Header="_Load game..." Command="ApplicationCommands.Open" />
 				<Separator />
 				<MenuItem Header="_Quit" Command="ApplicationCommands.Close" />
 			</MenuItem>
